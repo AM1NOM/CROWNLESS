@@ -9,6 +9,10 @@ class OverworldMap {
     this.upperImage = new Image();
     this.upperImage.src = config.upperSrc;
 
+    this.wallim = new Image();
+    this.wallim.src = config.wallsr;
+
+
     // Generate a random number once at the start
     
   }
@@ -20,6 +24,14 @@ class OverworldMap {
   drawLowerImage(ctx, cameraPerson,k,l) {
     ctx.drawImage(
       this.lowerImage,
+      utils.withGrid(k) - cameraPerson.x, // Use the pre-generated randomX
+      utils.withGrid(l) - cameraPerson.y
+    );
+  }
+
+  drawwall(ctx, cameraPerson,k,l) {
+    ctx.drawImage(
+      this.wallim,
       utils.withGrid(k) - cameraPerson.x, // Use the pre-generated randomX
       utils.withGrid(l) - cameraPerson.y
     );
@@ -38,6 +50,7 @@ class OverworldMap {
 window.OverworldMaps = {
   DemoRoom: {
     lowerSrc: "./images/maps/red.png",
+    wallsr: "./images/maps/wall.png",
     upperSrc: "./images/maps/door.png",
     gameObjects: {
       hero: new Person({

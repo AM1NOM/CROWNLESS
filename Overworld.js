@@ -10,7 +10,7 @@ let s3 = Math.floor(Math.random() * 10+4);
 let x4 = Math.floor(Math.random() * (x3+s3));
 let y4 = Math.floor(Math.random() * (y3+s3));
 let s4 = Math.floor(Math.random() * 10+4);
-let dx = Math.floor(Math.random() * (x1+s1-3) +2);
+let dx = Math.floor(Math.random() * (x1+s1-3) +x1+2);
 let dy = y1-2;
 class Overworld {
  constructor(config) {
@@ -36,6 +36,29 @@ class Overworld {
           arrow: this.directionInput.direction
         })
       })
+
+
+      
+      for (let i = -1; i < s1+1; i++) {
+        for (let j = -1; j < s1+1; j++) {
+          this.map.drawwall(this.ctx, cameraPerson,x1+i+0.5,y1+j);
+        }
+      }
+      for (let i = -1; i < s2+1; i++) {
+        for (let j = -1; j < s2+1; j++) {
+          this.map.drawwall(this.ctx, cameraPerson,x2+i+0.5,y2+j);
+        }
+      }
+      for (let i = -1; i < s3+1; i++) {
+        for (let j = -1; j < s3+1; j++) {
+          this.map.drawwall(this.ctx, cameraPerson,x3+i+0.5,y3+j);
+        }
+      }
+      for (let i = -1; i < s4+1; i++) {
+        for (let j = -1; j < s4+1; j++) {
+          this.map.drawwall(this.ctx, cameraPerson,x4+i+0.5,y4+j);
+        }
+      }
 
       //Draw Lower layer
       for (let i = 0; i < s1; i++) {
