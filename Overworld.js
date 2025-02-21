@@ -1,14 +1,14 @@
 let x1 = Math.floor(Math.random() * 10);
-let y1 = Math.floor(Math.random() * 10);
+let y1 = Math.floor(Math.random() * 10) - (x1%2)/2;
 let s1 = Math.floor(Math.random() * 10+4);
 let x2 = Math.floor(Math.random() * (x1+s1));
-let y2 = Math.floor(Math.random() * (y1+s1));
+let y2 = Math.floor(Math.random() * (y1+s1)) - (x2%2)/2;
 let s2 = Math.floor(Math.random() * 10+4);
 let x3 = Math.floor(Math.random() * (x2+s2));
-let y3 = Math.floor(Math.random() * (y2+s2));
+let y3 = Math.floor(Math.random() * (y2+s2)) - (x3%2)/2;
 let s3 = Math.floor(Math.random() * 10+4);
 let x4 = Math.floor(Math.random() * (x3+s3));
-let y4 = Math.floor(Math.random() * (y3+s3));
+let y4 = Math.floor(Math.random() * (y3+s3)) - (x4%2)/2;
 let s4 = Math.floor(Math.random() * 10+4);
 let dx = Math.floor(Math.random() * (x1+s1-3) +x1+2);
 let dy = y1-2;
@@ -39,47 +39,33 @@ class Overworld {
 
 
       
-      for (let i = -1; i < s1+1; i++) {
-        for (let j = -1; j < s1+1; j++) {
-          this.map.drawwall(this.ctx, cameraPerson,x1+i+0.5,y1+j);
-        }
-      }
-      for (let i = -1; i < s2+1; i++) {
-        for (let j = -1; j < s2+1; j++) {
-          this.map.drawwall(this.ctx, cameraPerson,x2+i+0.5,y2+j);
-        }
-      }
-      for (let i = -1; i < s3+1; i++) {
-        for (let j = -1; j < s3+1; j++) {
-          this.map.drawwall(this.ctx, cameraPerson,x3+i+0.5,y3+j);
-        }
-      }
-      for (let i = -1; i < s4+1; i++) {
-        for (let j = -1; j < s4+1; j++) {
-          this.map.drawwall(this.ctx, cameraPerson,x4+i+0.5,y4+j);
-        }
-      }
 
       //Draw Lower layer
       for (let i = 0; i < s1; i++) {
-        for (let j = 0; j < s1; j++) {
-          this.map.drawLowerImage(this.ctx, cameraPerson,x1+i+0.5,y1+j);
+        for (let j = 0; j < s1*0.5; j+=0.5) {
+          this.map.drawLowerImage(this.ctx, cameraPerson,x1+i+0.5+2*j,y1-j+0.5*i);
         }
+        this.map.drawwall(this.ctx, cameraPerson,x1+i+s1,y1+(i-s1)*0.5-2.5);
       }
       for (let i = 0; i < s2; i++) {
-        for (let j = 0; j < s2; j++) {
-          this.map.drawLowerImage(this.ctx, cameraPerson,x2+i+0.5,y2+j);
+        for (let j = 0; j < s2*0.5; j+=0.5) {
+          this.map.drawLowerImage(this.ctx, cameraPerson,x2+i+0.5+2*j,y2-j+0.5*i);
         }
+        this.map.drawwall(this.ctx, cameraPerson,x2+i+s2,y2+(i-s2)*0.5-2.5);
       }
       for (let i = 0; i < s3; i++) {
-        for (let j = 0; j < s3; j++) {
-          this.map.drawLowerImage(this.ctx, cameraPerson,x3+i+0.5,y3+j);
+        for (let j = 0; j < s3*0.5; j+=0.5) {
+          this.map.drawLowerImage(this.ctx, cameraPerson,x3+i+0.5+2*j,y3-j+0.5*i);
         }
+        this.map.drawwall(this.ctx, cameraPerson,x3+i+s3,y3+(i-s3)*0.5-2.5);
+
       }
       for (let i = 0; i < s4; i++) {
-        for (let j = 0; j < s4; j++) {
-          this.map.drawLowerImage(this.ctx, cameraPerson,x4+i+0.5,y4+j);
+        for (let j = 0; j < s4*0.5; j+=0.5) {
+          this.map.drawLowerImage(this.ctx, cameraPerson,x4+i+0.5+2*j,y4-j+0.5*i);
         }
+        this.map.drawwall(this.ctx, cameraPerson,x4+i+s4,y4+(i-s4)*0.5-2.5);
+
       }
 
       //Draw Game Objects

@@ -24,8 +24,8 @@ class OverworldMap {
   drawLowerImage(ctx, cameraPerson,k,l) {
     ctx.drawImage(
       this.lowerImage,
-      utils.withGrid(k) - cameraPerson.x, // Use the pre-generated randomX
-      utils.withGrid(l) - cameraPerson.y
+      utils.withGrid(k-0.5) - cameraPerson.x, // Use the pre-generated randomX
+      utils.withGrid(l-0.5) - cameraPerson.y
     );
   }
 
@@ -49,8 +49,8 @@ class OverworldMap {
 
 window.OverworldMaps = {
   DemoRoom: {
-    lowerSrc: "./images/maps/red.png",
-    wallsr: "./images/maps/wall.png",
+    lowerSrc: "./images/maps/redr.png",
+    wallsr: "./images/maps/wallr.png",
     upperSrc: "./images/maps/door.png",
     gameObjects: {
       hero: new Person({
