@@ -25,6 +25,8 @@ class Overworld {
     this.currentAnimationFrame = 0; // Track the current frame
   }
 
+  
+
   startGameLoop() {
     const step = (timestamp) => {
       // Clear off the canvas
@@ -74,7 +76,10 @@ class Overworld {
         this.currentAnimationFrame = (this.currentAnimationFrame + 1) % 12; // Cycle through 12 frames
         this.lastAnimationTime = timestamp;
       }
-      this.map.drawAnimation(this.ctx, cameraPerson, dx, dy, this.currentAnimationFrame);
+      this.map.drawAnimation(this.ctx, cameraPerson, 10, 20, this.currentAnimationFrame);
+      this.map.hooii(this.ctx, cameraPerson,-6,0);
+      this.map.f1f(this.ctx, cameraPerson,10,4);
+
 
       //Draw Game Objects
       Object.values(this.map.gameObjects).forEach(object => {

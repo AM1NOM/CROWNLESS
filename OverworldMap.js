@@ -15,6 +15,12 @@ class OverworldMap {
     // Load the animation sprite sheet
     this.animationImage = new Image();
     this.animationImage.src = config.animationSrc;
+
+    this.hooi = new Image();
+    this.hooi.src = config.h1src;
+
+    this.f1i = new Image();
+    this.f1i.src = config.f1src;
   }
 
   // Helper method to generate a random grid position
@@ -23,6 +29,22 @@ class OverworldMap {
   drawLowerImage(ctx, cameraPerson, k, l) {
     ctx.drawImage(
       this.lowerImage,
+      utils.withGrid(k - 0.5) - cameraPerson.x, // Use the pre-generated randomX
+      utils.withGrid(l - 0.5) - cameraPerson.y
+    );
+  }
+
+  hooii(ctx, cameraPerson, k, l) {
+    ctx.drawImage(
+      this.hooi,
+      utils.withGrid(k - 0.5) - cameraPerson.x, // Use the pre-generated randomX
+      utils.withGrid(l - 0.5) - cameraPerson.y
+    );
+  }
+
+  f1f(ctx, cameraPerson, k, l) {
+    ctx.drawImage(
+      this.f1i,
       utils.withGrid(k - 0.5) - cameraPerson.x, // Use the pre-generated randomX
       utils.withGrid(l - 0.5) - cameraPerson.y
     );
@@ -66,8 +88,10 @@ window.OverworldMaps = {
     lowerSrc: "./images/maps/redr.png",
     wallsr: "./images/maps/wallr.png",
     upperSrc: "./images/maps/door.png",
-    animationSrc: "./images/maps/borj-sat.png", // Path to your animation sprite sheet
-    gameObjects: {
+    animationSrc: "./images/maps/borj-sat.png", // Path to your animation sprite she
+    h1src: "./images/maps/h1.png",
+    f1src: "./images/maps/f1.png",
+  gameObjects: {
       hero: new Person({
         isPlayerControlled: true,
         x: utils.withGrid(5),
