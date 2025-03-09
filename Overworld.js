@@ -13,18 +13,21 @@ let s4 = Math.floor(Math.random() * 10+4);
 let dx = Math.floor(Math.random() * (x1+s1-3) +x1+2);
 let dy = y1-2;
 class Overworld {
- constructor(config) {
-   this.element = config.element;
-   this.canvas = this.element.querySelector(".game-canvas");
-   this.ctx = this.canvas.getContext("2d");
-   this.map = null;
-   
- }
- 
+  constructor(config) {
+    this.element = config.element;
+    this.canvas = this.element.querySelector(".game-canvas");
+    this.ctx = this.canvas.getContext("2d");
+    this.map = null;
+
+    // Animation timing variables
+    this.lastAnimationTime = 0;
+    this.animationFrameDelay = 1000; // Delay between frames in milliseconds
+    this.currentAnimationFrame = 0; // Track the current frame
+  }
 
   startGameLoop() {
-    const step = () => {
-      //Clear off the canvas
+    const step = (timestamp) => {
+      // Clear off the canvas
       this.ctx.clearRect(0, 0, this.canvas.width, this.canvas.height);
 
       //Establish the camera person
@@ -67,6 +70,11 @@ class Overworld {
         this.map.drawwall(this.ctx, cameraPerson,x4+i+s4,y4+(i-s4)*0.5-2.5);
 
       }
+      if (timestamp - this.lastAnimationTime > this.animationFrameDelay) {
+        this.currentAnimationFrame = (this.currentAnimationFrame + 1) % 12; // Cycle through 12 frames
+        this.lastAnimationTime = timestamp;
+      }
+      this.map.drawAnimation(this.ctx, cameraPerson, dx, dy, this.currentAnimationFrame);
 
       //Draw Game Objects
       Object.values(this.map.gameObjects).forEach(object => {
@@ -75,20 +83,26 @@ class Overworld {
 
       //Draw Upper layer
       this.map.drawUpperImage(this.ctx, cameraPerson,dx,dy);
-      
-      requestAnimationFrame(() => {
-        step();   
-      })
-    }
-    step();
- }
 
- init() {
-  this.map = new OverworldMap(window.OverworldMaps.DemoRoom);
 
-  this.directionInput = new DirectionInput();
-  this.directionInput.init();
+      // Draw Animation (with frame delay)
 
-  this.startGameLoop();
- }
+      // Request the next frame
+      requestAnimationFrame((timestamp) => {
+        step(timestamp);
+      });
+    };
+
+    // Start the game loop
+    step(0);
+  }
+
+  init() {
+    this.map = new OverworldMap(window.OverworldMaps.DemoRoom);
+
+    this.directionInput = new DirectionInput();
+    this.directionInput.init();
+
+    this.startGameLoop();
+  }
 }
