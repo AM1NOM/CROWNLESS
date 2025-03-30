@@ -86,7 +86,7 @@ class OverworldMap {
 window.OverworldMaps = {
   DemoRoom: {
     lowerSrc: "./images/maps/redr.png",
-    wallsr: "./images/maps/wallr.png",
+    wallsr: "./images/maps/sun.webp",
     upperSrc: "./images/maps/door.png",
     animationSrc: "./images/maps/borj-sat.png", // Path to your animation sprite she
     h1src: "./images/maps/h1.png",

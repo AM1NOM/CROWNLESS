@@ -24,21 +24,21 @@ class Sprite {
       "idle-right": [ [0,1] ],
       "idle-up"   : [ [0,2] ],
       "idle-left" : [ [0,3] ],
-      "walk-down" : [ [1,0],[0,0],[3,0],[0,0] ],
-      "walk-right": [ [1,1],[0,1],[3,1],[0,1] ],
-      "walk-up"   : [ [1,2],[0,2],[3,2],[0,2] ],
-      "walk-left" : [ [1,3],[0,3],[3,3],[0,3] ],
+      "walk-down" : [ [1,0],[0,0],[2,0],[0,0] ],
+      "walk-right": [ [1,1],[0,1],[2,1],[0,1] ],
+      "walk-up"   : [ [1,2],[0,2],[2,2],[0,2] ],
+      "walk-left" : [ [1,3],[0,3],[2,3],[0,3] ],
     
       // 🔥 Add diagonal animations
-      "idle-up-right": [ [0,1] ],  
+      "idle-up-right": [ [0,4] ],  
       "idle-up-left": [ [0,3] ],   
       "idle-down-right": [ [0,1] ], 
       "idle-down-left": [ [0,3] ],  
     
-      "walk-up-right": [ [1,1],[0,1],[3,1],[0,1] ],
-      "walk-up-left": [ [1,3],[0,3],[3,3],[0,3] ],
-      "walk-down-right": [ [1,1],[0,1],[3,1],[0,1] ],
-      "walk-down-left": [ [1,3],[0,3],[3,3],[0,3] ]
+      "walk-up-right": [ [1,1],[0,1],[2,1],[0,1] ],
+      "walk-up-left": [ [1,3],[0,3],[2,3],[0,3] ],
+      "walk-down-right": [ [1,1],[0,1],[2,1],[0,1] ],
+      "walk-down-left": [ [1,3],[0,3],[2,3],[0,3] ]
     };
     
     this.currentAnimation = "idle-right"; // config.currentAnimation || "idle-down";
@@ -93,10 +93,10 @@ class Sprite {
     const [frameX, frameY] = this.frame;
 
     this.isLoaded && ctx.drawImage(this.image,
-      frameX * 32, frameY * 32,
-      32,32,
+      frameX * 32, frameY * 64,
+      32,64,
       x,y,
-      32,32
+      32,64
     )
 
     this.updateAnimationProgress();

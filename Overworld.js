@@ -69,9 +69,10 @@ class Overworld {
         for (let j = 0; j < s4*0.5; j+=0.5) {
           this.map.drawLowerImage(this.ctx, cameraPerson,x4+i+0.5+2*j,y4-j+0.5*i);
         }
-        this.map.drawwall(this.ctx, cameraPerson,x4+i+s4,y4+(i-s4)*0.5-2.5);
 
       }
+      this.map.drawwall(this.ctx, cameraPerson,x4+s4,y4-s4);
+
       if (timestamp - this.lastAnimationTime > this.animationFrameDelay) {
         this.currentAnimationFrame = (this.currentAnimationFrame + 1) % 12; // Cycle through 12 frames
         this.lastAnimationTime = timestamp;
