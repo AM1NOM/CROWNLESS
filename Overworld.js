@@ -46,32 +46,12 @@ class Overworld {
       
 
       //Draw Lower layer
-      for (let i = 0; i < s1; i++) {
-        for (let j = 0; j < s1*0.5; j+=0.5) {
-          this.map.drawLowerImage(this.ctx, cameraPerson,x1+i+0.5+2*j,y1-j+0.5*i);
-        }
-        this.map.drawwall(this.ctx, cameraPerson,x1+i+s1,y1+(i-s1)*0.5-2.5);
-      }
-      for (let i = 0; i < s2; i++) {
-        for (let j = 0; j < s2*0.5; j+=0.5) {
-          this.map.drawLowerImage(this.ctx, cameraPerson,x2+i+0.5+2*j,y2-j+0.5*i);
-        }
-        this.map.drawwall(this.ctx, cameraPerson,x2+i+s2,y2+(i-s2)*0.5-2.5);
-      }
-      for (let i = 0; i < s3; i++) {
-        for (let j = 0; j < s3*0.5; j+=0.5) {
-          this.map.drawLowerImage(this.ctx, cameraPerson,x3+i+0.5+2*j,y3-j+0.5*i);
-        }
-        this.map.drawwall(this.ctx, cameraPerson,x3+i+s3,y3+(i-s3)*0.5-2.5);
-
-      }
-      for (let i = 0; i < s4; i++) {
-        for (let j = 0; j < s4*0.5; j+=0.5) {
-          this.map.drawLowerImage(this.ctx, cameraPerson,x4+i+0.5+2*j,y4-j+0.5*i);
-        }
-
-      }
-      this.map.drawwall(this.ctx, cameraPerson,x4+s4,y4-s4);
+      
+      this.map.drawLowerImage(this.ctx, cameraPerson,10,-10);
+        
+      this.map.drawwall(this.ctx, cameraPerson,-30,10);
+      
+      
 
       if (timestamp - this.lastAnimationTime > this.animationFrameDelay) {
         this.currentAnimationFrame = (this.currentAnimationFrame + 1) % 12; // Cycle through 12 frames
