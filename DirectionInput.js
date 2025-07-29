@@ -3,6 +3,7 @@ class DirectionInput {
     this.heldDirections = [];
 
     this.map = {
+      "KeyB": "jump",
       "ArrowUp": "up",
       "KeyW": "up",
       "ArrowDown": "down",

@@ -6,6 +6,7 @@ class Person extends GameObject {
     this.isPlayerControlled = config.isPlayerControlled || false;
 
     this.directionUpdate = {
+      "jump": ["y", -0.5],
       "up": ["y", -0.5],
       "down": ["y", 0.5],
       "left": ["x", -0.5],
@@ -152,6 +153,7 @@ class Person extends GameObject {
           "s": "down",
           "a": "left",
           "d": "right",
+          "b": "jump",
         };
         if (keyMap[e.key]) {
           window.playerInput = keyMap[e.key];
