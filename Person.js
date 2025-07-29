@@ -36,25 +36,23 @@ class Person extends GameObject {
     if (this.isPlayerControlled && this.movingProgressRemaining === 0) {
       const inputDirection = window.playerInput || state.arrow;
   
-      if (inputDirection === "jump" && !this.jumping) {
-        this.jumping = true;
-        this.jumpPhase = "up";
-        this.jumpHeight = 8; // Jump height in pixels
-        this.sprite.setAnimation("walk-jump");
-        window.playerInput = null;
+      if (inputDirection === "jump" && !this.isJumping) {
+        this.isJumping = true;
+        this.jumpHeight = 16;
       
+        // Trigger camera jump (move up)
+        cameraJumpOffset = 16;
+      
+        // Fall after 1 second
         setTimeout(() => {
-          this.jumpPhase = "down";
+          this.jumpHeight = 0;
       
-          setTimeout(() => {
-            this.jumping = false;
-            this.jumpHeight = 0;
-            this.jumpPhase = null;
-          }, 200); // Falling down delay
-        }, 400); // Stay in air for 1 second
-      
-        return; // Skip other movement
+          // Camera back down
+          cameraJumpOffset = 0;
+          this.isJumping = false;
+        }, 1000);
       }
+      
       
   
       if (inputDirection) {
