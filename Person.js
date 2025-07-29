@@ -6,7 +6,7 @@ class Person extends GameObject {
     this.isPlayerControlled = config.isPlayerControlled || false;
 
     this.directionUpdate = {
-      "jump": ["y", -0.5],
+      "jump": ["y", 0],
       "up": ["y", -0.5],
       "down": ["y", 0.5],
       "left": ["x", -0.5],
@@ -26,17 +26,44 @@ class Person extends GameObject {
   }
 
   update(state) {
+    if (this.jumpCooldown) {
+      return; // Skip update during jump delay
+    }
+  
     this.updatePosition();
     this.updateSprite(state);
-
+  
     if (this.isPlayerControlled && this.movingProgressRemaining === 0) {
       const inputDirection = window.playerInput || state.arrow;
+  
+      if (inputDirection === "jump" && !this.jumping) {
+        this.jumping = true;
+        this.jumpPhase = "up";
+        this.jumpHeight = 8; // Jump height in pixels
+        this.sprite.setAnimation("walk-jump");
+        window.playerInput = null;
+      
+        setTimeout(() => {
+          this.jumpPhase = "down";
+      
+          setTimeout(() => {
+            this.jumping = false;
+            this.jumpHeight = 0;
+            this.jumpPhase = null;
+          }, 200); // Falling down delay
+        }, 400); // Stay in air for 1 second
+      
+        return; // Skip other movement
+      }
+      
+  
       if (inputDirection) {
         this.direction = inputDirection;
-        this.movingProgressRemaining = 8; // Faster movement
+        this.movingProgressRemaining = 8;
       }
     }
   }
+  
 
   updatePosition() {
     if (this.movingProgressRemaining > 0) {

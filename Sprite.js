@@ -92,22 +92,24 @@ class Sprite {
   
 
   draw(ctx, cameraPerson) {
+    const jumpOffset = this.gameObject.jumpHeight || 0;
+  
     const x = this.gameObject.x - 8 + utils.withGrid(10.5) - cameraPerson.x;
-    const y = this.gameObject.y - 18 + utils.withGrid(6) - cameraPerson.y;
-
-    this.isShadowLoaded && ctx.drawImage(this.shadow, x, y);
-
-
+    const y = this.gameObject.y - 18 + utils.withGrid(6) - cameraPerson.y - jumpOffset;
+  
+    this.isShadowLoaded && ctx.drawImage(this.shadow, x, y + jumpOffset); // Shadow stays grounded
+  
     const [frameX, frameY] = this.frame;
-
+  
     this.isLoaded && ctx.drawImage(this.image,
       frameX * 32, frameY * 64,
-      32,64,
-      x,y,
-      32,64
-    )
-
+      32, 64,
+      x, y,
+      32, 64
+    );
+  
     this.updateAnimationProgress();
   }
+  
 
 }
