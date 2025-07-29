@@ -20,10 +20,12 @@ class Sprite {
 
     //Configure Animation & Initial State
     this.animations = config.animations || {
+      "idle-jump" : [[0,0]],
       "idle-down" : [ [0,0] ],
       "idle-right": [ [0,1] ],
       "idle-up"   : [ [0,2] ],
       "idle-left" : [ [0,3] ],
+      "walk-jump" : [[0,0]],
       "walk-down" : [ [1,0],[0,0],[2,0],[0,0] ],
       "walk-right": [ [1,1],[0,1],[2,1],[0,1] ],
       "walk-up"   : [ [1,2],[0,2],[2,2],[0,2] ],
@@ -35,7 +37,7 @@ class Sprite {
       "idle-down-right": [ [0,1] ], 
       "idle-down-left": [ [0,3] ],  
     
-      "walk-up-right": [ [1,1],[0,1],[2,1],[0,1] ],
+      "walk-up-right": [ [1,4],[0,4],[2,4],[0,4] ],
       "walk-up-left": [ [1,3],[0,3],[2,3],[0,3] ],
       "walk-down-right": [ [1,1],[0,1],[2,1],[0,1] ],
       "walk-down-left": [ [1,3],[0,3],[2,3],[0,3] ]
@@ -53,8 +55,14 @@ class Sprite {
   }
 
   get frame() {
-    return this.animations[this.currentAnimation][this.currentAnimationFrame]
+    const anim = this.animations[this.currentAnimation];
+    if (!anim) {
+      console.warn(`Missing animation: "${this.currentAnimation}"`);
+      return [0, 0]; // fallback frame
+    }
+    return anim[this.currentAnimationFrame] || anim[0]; // fallback to first frame
   }
+  
 
   setAnimation(key) {
     if (this.currentAnimation !== key) {
